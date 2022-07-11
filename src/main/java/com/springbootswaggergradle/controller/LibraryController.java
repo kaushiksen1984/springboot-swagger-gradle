@@ -2,6 +2,13 @@ package com.springbootswaggergradle.controller;
 
 import com.springbootswaggergradle.model.Book;
 import com.springbootswaggergradle.repository.BookRepository;
+import io.swagger.annotations.Api;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,11 +20,20 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/library")
+@Api(value="",tags = {"Library Service"})
+@Tag(name = "Library Service", description = "Sample Service for Library to get, add, update and delete books")
 public class LibraryController {
 
     @Autowired
     BookRepository bookRepository;
 
+    @Operation(summary = "Get All the books", description = "Get al list of books in the library", tags = "Get")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Found the books",
+            content = {@Content(mediaType = "application/json",
+            schema = @Schema(implementation = Book.class))}),
+        @ApiResponse(responseCode = "204", description = "No Books found",
+                content = @Content)})
     @GetMapping(value = "/getAllBooks")
     public ResponseEntity<List<Book>> getAllBooks() {
         try
