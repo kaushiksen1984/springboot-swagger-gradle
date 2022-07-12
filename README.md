@@ -29,3 +29,6 @@ db.books.find()
 gradle clean build
 ./gradlew clean build
 ./gradlew bootRun
+
+## Swagger UI link
+https://localhost:8082/swagger-ui/

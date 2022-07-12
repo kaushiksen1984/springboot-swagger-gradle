@@ -8,6 +8,10 @@ spring:
       port: 27017
       database: library
 
+management:
+  server:
+    port: 9090
+
 # For Prod
 # springfox:
 #   documentation:
